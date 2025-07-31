@@ -44,12 +44,11 @@
     </div>
 
     <div id="browserNotice">
-        <p>⚠️ Ouvre ce lien dans ton navigateur (Safari/Chrome) pour continuer !</p>
+        <p>⚠️ Ouvre ce lien dans ton navigateur (Safari/Chrome) si ça ne s'ouvre pas !</p>
         <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" style="color: #00f; font-size: 20px;">➡️ Ouvrir la surprise 🎁</a>
     </div>
 
     <script>
-        // Fonction pour détecter Instagram/Facebook/TikTok
         function isInAppBrowser() {
             const ua = navigator.userAgent || navigator.vendor || window.opera;
             return /Instagram|FBAN|FBAV|TikTok/.test(ua);
@@ -60,14 +59,18 @@
         const mainContent = document.getElementById('mainContent');
 
         btn.addEventListener('click', () => {
-            if (isInAppBrowser()) {
-                // Si dans Instagram/Facebook/TikTok, afficher le message
-                mainContent.style.display = 'none';
-                browserNotice.style.display = 'block';
-            } else {
-                // Sinon, rediriger direct vers YouTube
-                window.location.href = "https://www.youtube.com/watch?v=xvFZjo5PgG0";
-            }
+            // Essayer d'ouvrir l'app YouTube via deep link
+            window.location.href = "youtube://watch?v=xvFZjo5PgG0";
+
+            // Si ça ne marche pas (app pas installée), fallback vers la page classique après 2 secondes
+            setTimeout(() => {
+                if (isInAppBrowser()) {
+                    mainContent.style.display = 'none';
+                    browserNotice.style.display = 'block';
+                } else {
+                    window.location.href = "https://www.youtube.com/watch?v=xvFZjo5PgG0";
+                }
+            }, 2000);
         });
     </script>
 

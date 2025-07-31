@@ -3,46 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erreur de lecture</title>
+    <title>Surprise</title>
     <style>
-        body {
-            background-color: #fafafa;
-            font-family: sans-serif;
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            text-align: center;
-            color: #333;
-        }
-        .msg {
-            font-size: 18px;
-            margin-bottom: 20px;
+            color: white;
+            font-family: Arial, sans-serif;
         }
         button {
-            padding: 15px 30px;
-            font-size: 16px;
-            background-color: #3897f0;
-            color: white;
+            padding: 20px 40px;
+            font-size: 24px;
             border: none;
-            border-radius: 6px;
+            border-radius: 12px;
+            background-color: #ff0000;
+            color: #fff;
             cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        #browserNotice {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
 <body>
-    <div class="msg">
-        Ce contenu n'est pas disponible dans cette application.<br>
-        Veuillez l'ouvrir dans votre navigateur pour continuer.
+
+    <div id="mainContent">
+        <button id="startBtn">Clique ici !</button>
     </div>
-    <button onclick="ouvrirDansNavigateur()">Ouvrir dans le navigateur</button>
+
+    <div id="browserNotice">
+        <p>⚠️ Ouvre ce lien dans ton navigateur (Safari/Chrome) pour continuer !</p>
+        <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" style="color: #00f; font-size: 20px;">➡️ Ouvrir la surprise 🎁</a>
+    </div>
 
     <script>
-        function ouvrirDansNavigateur() {
-            window.location.href = "https://rodrigosuarez82.github.io/TON_SITE_DE_RICKROLL/"; 
-            // Remplace cette URL par celle de ton site Rickroll version fullscreen
+        // Fonction pour détecter Instagram/Facebook/TikTok
+        function isInAppBrowser() {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            return /Instagram|FBAN|FBAV|TikTok/.test(ua);
         }
+
+        const btn = document.getElementById('startBtn');
+        const browserNotice = document.getElementById('browserNotice');
+        const mainContent = document.getElementById('mainContent');
+
+        btn.addEventListener('click', () => {
+            if (isInAppBrowser()) {
+                // Si dans Instagram/Facebook/TikTok, afficher le message
+                mainContent.style.display = 'none';
+                browserNotice.style.display = 'block';
+            } else {
+                // Sinon, rediriger direct vers YouTube
+                window.location.href = "https://www.youtube.com/watch?v=xvFZjo5PgG0";
+            }
+        });
     </script>
+
 </body>
 </html>

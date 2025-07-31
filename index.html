@@ -1,62 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise</title>
+    <title>Erreur de lecture</title>
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            background-color: #000;
+        body {
+            background-color: #fafafa;
+            font-family: sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            text-align: center;
+            color: #333;
+        }
+        .msg {
+            font-size: 18px;
+            margin-bottom: 20px;
         }
         button {
-            padding: 20px 40px;
-            font-size: 24px;
+            padding: 15px 30px;
+            font-size: 16px;
+            background-color: #3897f0;
+            color: white;
             border: none;
-            border-radius: 12px;
-            background-color: #ff0000;
-            color: #fff;
+            border-radius: 6px;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-        }
-        iframe {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
         }
     </style>
 </head>
 <body>
-    <button id="startBtn">Clique ici !</button>
-    <iframe id="rickroll" src="https://www.youtube.com/embed/xvFZjo5PgG0?autoplay=1&loop=1&playlist=xvFZjo5PgG0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="msg">
+        Ce contenu n'est pas disponible dans cette application.<br>
+        Veuillez l'ouvrir dans votre navigateur pour continuer.
+    </div>
+    <button onclick="ouvrirDansNavigateur()">Ouvrir dans le navigateur</button>
 
     <script>
-        const btn = document.getElementById('startBtn');
-        const iframe = document.getElementById('rickroll');
-
-        btn.addEventListener('click', () => {
-            btn.style.display = 'none';
-            iframe.style.display = 'block';
-
-            // Mettre l'iframe en fullscreen
-            if (iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe.webkitRequestFullscreen) { // Safari
-                iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) { // IE11
-                iframe.msRequestFullscreen();
-            }
-        });
+        function ouvrirDansNavigateur() {
+            window.location.href = "https://rodrigosuarez82.github.io/TON_SITE_DE_RICKROLL/"; 
+            // Remplace cette URL par celle de ton site Rickroll version fullscreen
+        }
     </script>
 </body>
 </html>
